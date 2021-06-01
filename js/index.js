@@ -1,8 +1,6 @@
 import { facturas } from "../datos/facturas.js";
 
-const extraerEstado = (estado) => {
-  return estado ? "Abonada" : "Pendiente";
-};
+const extraerEstado = (estado) => (estado ? "Abonada" : "Pendiente");
 
 const calcularTotal = (base, iva) => base + iva;
 
@@ -33,6 +31,9 @@ const calcularIvaTabla = (ivatotal) => {};
 const calcularToltalTabla = (totaltabla) => {};
 
 const calcularBaseTabla = (basetabla) => {};
+const baseTotal = [];
+const ivaTotal = [];
+const totalTabla = [];
 
 const modificarEstado = (moldeObjeto) => {
   if (moldeObjeto.estado.textContent !== "Abonada") {
@@ -95,6 +96,10 @@ const main = () => {
     tipo,
     abonada,
   } of facturasFiltradas) {
+    baseTotal.push(base);
+    ivaTotal.push(tipoIva);
+    totalTabla.push(base + (tipoIva * base) / 100);
+
     const filaClonada = fila.cloneNode();
     filaClonada.classList.remove("d-none");
     moldeObjeto.base.textContent = `${base}€`;
@@ -120,6 +125,8 @@ const main = () => {
     creacionFila(cuerpoTabla, filaClonada, moldeObjeto);
   }
 };
+
+console.log(totalTabla, baseTotal, ivaTotal);
 
 const creacionFila = (cuerpo, fila, columnaObjeto) => {
   for (const [propiedad, valor] of Object.entries(columnaObjeto)) {
