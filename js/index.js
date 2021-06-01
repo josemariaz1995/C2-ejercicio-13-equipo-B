@@ -45,7 +45,7 @@ const modificarEstado = (moldeObjeto) => {
   }
 };
 
-const modificarVencimiento = (moldeObjetoo) => {
+const modificarVencimiento = (moldeObjeto) => {
   if (moldeObjeto.vence.textContent !== "-") {
     moldeObjeto.vence.classList.add("no-abonada");
     moldeObjeto.vence.classList.remove("abonada");
@@ -57,16 +57,14 @@ const modificarVencimiento = (moldeObjetoo) => {
 };
 
 const main = () => {
-  const cuerpoTabla = document.querySelector(".cuerpo-tabla");
-
+  S;
   const facturasFiltradas = facturas.filter(
     (factura) => factura.tipo === "ingreso"
   );
 
+  const cuerpoTabla = document.querySelector(".cuerpo-tabla");
   const pieTabla = document.querySelector(".pie-tabla");
-
   const fila = document.querySelector(".filaMolde");
-
   const moldeHijos = Array.from(document.querySelectorAll(".filaMolde > td"));
 
   const llamadaClase = (clase) =>
@@ -97,6 +95,7 @@ const main = () => {
   } of facturasFiltradas) {
     const filaClonada = fila.cloneNode();
     filaClonada.classList.remove("d-none");
+
     moldeObjeto.base.textContent = `${base}€`;
     moldeObjeto.numero.textContent = numero;
     moldeObjeto.fecha.textContent = extraerFecha(fecha);
