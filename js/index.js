@@ -1,8 +1,6 @@
 import { facturas } from "../datos/facturas.js";
 
-const extraerEstado = (estado) => {
-  return estado ? "Abonada" : "Pendiente";
-};
+const extraerEstado = (estado) => (estado ? "Abonada" : "Pendiente");
 
 const calcularTotal = (base, iva) => base + iva;
 
@@ -33,6 +31,9 @@ const calcularIvaTabla = (ivatotal) => {};
 const calcularToltalTabla = (totaltabla) => {};
 
 const calcularBaseTabla = (basetabla) => {};
+const baseTotal = [];
+const ivaTotal = [];
+const totalTabla = [];
 
 const main = () => {
   const cuerpoTabla = document.querySelector(".cuerpo-tabla");
@@ -73,6 +74,10 @@ const main = () => {
     tipo,
     abonada,
   } of facturasFiltradas) {
+    baseTotal.push(base);
+    ivaTotal.push(tipoIva);
+    totalTabla.push(base + (tipoIva * base) / 100);
+
     const filaClonada = fila.cloneNode();
     filaClonada.classList.remove("d-none");
     moldeObjeto.base.textContent = `${base}€`;
@@ -85,22 +90,17 @@ const main = () => {
     )}€ (${tipoIva} %)`;
 
     moldeObjeto.estado.textContent = extraerEstado(abonada);
-    if (extraerEstado(abonada) !== "Abonada") {
-      moldeObjeto.estado.classList.add("no-abonada");
-    } else {
-      moldeObjeto.estado.classList.remove("no-abonada");
-    }
     moldeObjeto.vence.textContent = extraerVence(abonada, fecha, vencimiento);
-    if (extraerVence(abonada, fecha, vencimiento) !== "-") {
-      moldeObjeto.vence.classList.add("no-abonada");
-    } else {
-      moldeObjeto.vence.classList.remove("no-abonada");
-    }
-    moldeObjeto.total.textContent = calcularTotal(base, (base * tipoIva) / 100);
+    moldeObjeto.total.textContent = `${calcularTotal(
+      base,
+      (base * tipoIva) / 100
+    )}€`;
 
     creacionFila(cuerpoTabla, filaClonada, moldeObjeto);
   }
 };
+
+console.log(totalTabla, baseTotal, ivaTotal);
 
 const creacionFila = (cuerpo, fila, columnaObjeto) => {
   for (const [propiedad, valor] of Object.entries(columnaObjeto)) {
