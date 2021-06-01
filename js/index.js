@@ -1,10 +1,20 @@
 import { facturas } from "../datos/facturas.js";
 
-const extraerEstado = () => {};
+const extraerEstado = (estado) => {
+  return estado ? "Abonada" : "Pendiente";
+};
 
 const calcularTotal = (base, iva) => base + iva;
 
-const extraerVence = () => {};
+const extraerVence = (estado, fecha, vencimiento) => {
+  if (estado) {
+    return "-";
+  } else {
+    return `${extraerFecha(vencimiento)} hace ${Math.floor(
+      (Date.now() - vencimiento) / (1000 * 3600 * 24)
+    )} dias`;
+  }
+};
 
 const extraerFecha = (fecha) => {
   const date = new Date(fecha);
@@ -73,9 +83,13 @@ const main = () => {
       base,
       tipoIva
     )}€ (${tipoIva} %)`;
+
+    moldeObjeto.estado.textContent = extraerEstado(abonada);
+    moldeObjeto.vence.textContent = extraerVence(abonada, fecha, vencimiento);
     moldeObjeto.total.textContent = calcularTotal(base, (base * tipoIva) / 100);
 
     creacionFila(cuerpoTabla, filaClonada, moldeObjeto);
+
   }
 };
 
