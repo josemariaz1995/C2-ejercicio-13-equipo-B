@@ -63,7 +63,6 @@ const main = () => {
     tipo,
     abonada,
   } of facturasFiltradas) {
-
     const filaClonada = fila.cloneNode();
     filaClonada.classList.remove("d-none");
     moldeObjeto.base.textContent = `${base}€`;
@@ -74,9 +73,9 @@ const main = () => {
       base,
       tipoIva
     )}€ (${tipoIva} %)`;
-    if (tipo === "ingreso") {
-      creacionFila(cuerpoTabla, filaClonada, moldeObjeto);
-    }
+    moldeObjeto.total.textContent = calcularTotal(base, (base * tipoIva) / 100);
+
+    creacionFila(cuerpoTabla, filaClonada, moldeObjeto);
   }
 };
 
