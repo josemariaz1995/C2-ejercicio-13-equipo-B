@@ -87,14 +87,20 @@ const main = () => {
     moldeObjeto.estado.textContent = extraerEstado(abonada);
     if (extraerEstado(abonada) !== "Abonada") {
       moldeObjeto.estado.classList.add("no-abonada");
+      moldeObjeto.estado.classList.remove("abonada");
     } else {
       moldeObjeto.estado.classList.remove("no-abonada");
+      moldeObjeto.estado.classList.remove("table-success");
+      moldeObjeto.estado.classList.add("abonada");
     }
     moldeObjeto.vence.textContent = extraerVence(abonada, fecha, vencimiento);
     if (extraerVence(abonada, fecha, vencimiento) !== "-") {
       moldeObjeto.vence.classList.add("no-abonada");
+      moldeObjeto.vence.classList.remove("abonada");
     } else {
       moldeObjeto.vence.classList.remove("no-abonada");
+      moldeObjeto.vence.classList.remove("table-success");
+      moldeObjeto.vence.classList.add("abonada");
     }
     moldeObjeto.total.textContent = calcularTotal(base, (base * tipoIva) / 100);
 

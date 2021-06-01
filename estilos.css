@@ -208,7 +208,15 @@ button[type="submit"] {
   margin: 0 auto;
 }
 .no-abonada {
-  background-color: #ff4242;
+  background-color: #f5c6cb;
+}
+
+.abonada {
+  background-color: #c3e6cb;
+}
+
+.no-abonada:hover {
+  background-color: #f5c6cb;
 }
 
 @media (max-width: 1000px) {
