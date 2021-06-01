@@ -6,6 +6,14 @@ const calcularTotal = (base, iva) => base + iva;
 
 const extraerVence = () => {};
 
+const extraerFecha = (fecha) => {
+  const date = new Date(fecha);
+  const fechaDiaMesAnyo = `${date.getDate()}/${
+    date.getMonth() + 1
+  }/${date.getFullYear()}`;
+  return fechaDiaMesAnyo;
+};
+
 const extraerConcepto = () => {};
 
 const extraerIva = (base, iva) => (base * iva) / 100;
@@ -40,10 +48,20 @@ const main = () => {
     estado: llamadaClase("estadoFila"),
     vence: llamadaClase("venceFila"),
   };
-  for (const { base } of facturas) {
+  for (const {
+    numero,
+    fecha,
+    vencimiento,
+    concepto,
+    base,
+    tipoIva,
+    tipo,
+    abonada,
+  } of facturas) {
     const filaClonada = fila.cloneNode();
     filaClonada.classList.remove("d-none");
-    moldeObjeto.base.textContent = base;
+    moldeObjeto.base.textContent = `${base} €`;
+    moldeObjeto.numero.textContent = numero;
     creacionFila(cuerpoTabla, filaClonada, moldeObjeto);
   }
 };
