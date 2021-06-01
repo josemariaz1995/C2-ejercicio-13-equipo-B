@@ -207,6 +207,10 @@ button[type="submit"] {
   width: 206px;
   margin: 0 auto;
 }
+.no-abonada {
+  background-color: #ff4242;
+}
+
 @media (max-width: 1000px) {
   body {
     font-size: 14px;
