@@ -57,7 +57,6 @@ const modificarVencimiento = (moldeObjeto) => {
 };
 
 const main = () => {
-  S;
   const facturasFiltradas = facturas.filter(
     (factura) => factura.tipo === "ingreso"
   );
