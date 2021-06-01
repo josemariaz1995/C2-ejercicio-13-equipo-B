@@ -16,7 +16,7 @@ const extraerFecha = (fecha) => {
 
 const extraerConcepto = () => {};
 
-const extraerIva = (base, iva) => (base * iva) / 100;
+const calcularIva = (base, iva) => (base * iva) / 100;
 
 const calcularIvaTabla = () => {};
 
@@ -48,6 +48,7 @@ const main = () => {
     estado: llamadaClase("estadoFila"),
     vence: llamadaClase("venceFila"),
   };
+
   for (const {
     numero,
     fecha,
@@ -60,9 +61,17 @@ const main = () => {
   } of facturas) {
     const filaClonada = fila.cloneNode();
     filaClonada.classList.remove("d-none");
-    moldeObjeto.base.textContent = `${base} €`;
+    moldeObjeto.base.textContent = `${base}€`;
     moldeObjeto.numero.textContent = numero;
-    creacionFila(cuerpoTabla, filaClonada, moldeObjeto);
+    moldeObjeto.fecha.textContent = extraerFecha(fecha);
+    moldeObjeto.concepto.textContent = concepto;
+    moldeObjeto.iva.textContent = `${calcularIva(
+      base,
+      tipoIva
+    )}€ (${tipoIva} %)`;
+    if (tipo === "ingreso") {
+      creacionFila(cuerpoTabla, filaClonada, moldeObjeto);
+    }
   }
 };
 
