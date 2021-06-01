@@ -8,8 +8,6 @@ const extraerVence = () => {};
 
 const extraerConcepto = () => {};
 
-const extraerBase = () => {};
-
 const extraerIva = (base, iva) => (base * iva) / 100;
 
 const calcularIvaTabla = () => {};
