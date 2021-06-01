@@ -2,7 +2,7 @@ import { facturas } from "../datos/facturas.js";
 
 const extraerEstado = () => {};
 
-const calcularTotal = () => {};
+const calcularTotal = (base, iva) => {};
 
 const extraerVence = () => {};
 
@@ -10,7 +10,9 @@ const extraerConcepto = () => {};
 
 const extraerBase = () => {};
 
-const extraerIva = () => {};
+const extraerIva = (base, iva) => (base * iva) / 100;
+
+console.log(extraerIva(3000, 21));
 
 const calcularIvaTabla = () => {};
 
