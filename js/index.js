@@ -26,14 +26,11 @@ const extraerConcepto = () => {};
 
 const calcularIva = (base, iva) => (base * iva) / 100;
 
-const calcularIvaTabla = (ivatotal) => {ivaTotal.reduce((contador,numeritos)=>numeritos+contador,0)};
-
-const calcularToltalTabla = (totaltabla) => {totalTabla.reduce((contador,numeritos)=>numeritos+contador,0)};
-
-const calcularBaseTabla = (basetabla) => {baseTotal.reduce((contador,numeritos)=>numeritos+contador,0)};
 const baseTotal = [];
 const ivaTotal = [];
-const totalTabla = [];
+
+const calcularTotales = (total) =>
+  total.reduce((contador, numeritos) => numeritos + contador, 0);
 
 const modificarEstado = (moldeObjeto) => {
   if (moldeObjeto.estado.textContent !== "Abonada") {
@@ -61,9 +58,11 @@ const main = () => {
   const facturasFiltradas = facturas.filter(
     (factura) => factura.tipo === "ingreso"
   );
-
-  const cuerpoTabla = document.querySelector(".cuerpo-tabla");
   const pieTabla = document.querySelector(".pie-tabla");
+  const cuerpoTabla = document.querySelector(".cuerpo-tabla");
+  const sumaTotalBase = pieTabla.querySelector(".totalesBase");
+  const sumaTotalIva = pieTabla.querySelector(".totalesIva");
+  const sumaTotalTabla = pieTabla.querySelector(".totalesTotal");
   const fila = document.querySelector(".filaMolde");
   const moldeHijos = Array.from(document.querySelectorAll(".filaMolde > td"));
 
@@ -94,8 +93,7 @@ const main = () => {
     abonada,
   } of facturasFiltradas) {
     baseTotal.push(base);
-    ivaTotal.push(tipoIva);
-    totalTabla.push(base + (tipoIva * base) / 100);
+    ivaTotal.push(calcularIva(base, tipoIva));
 
     const filaClonada = fila.cloneNode();
     filaClonada.classList.remove("d-none");
@@ -122,9 +120,16 @@ const main = () => {
 
     creacionFila(cuerpoTabla, filaClonada, moldeObjeto);
   }
-};
+  console.log(baseTotal);
 
-console.log(totalTabla, baseTotal, ivaTotal);
+  sumaTotalBase.textContent = `${calcularTotales(baseTotal)}`;
+
+  sumaTotalIva.textContent = `${calcularTotales(ivaTotal)}`;
+
+  sumaTotalTabla.textContent = `${
+    +sumaTotalBase.textContent + +sumaTotalIva.textContent
+  }€`;
+};
 
 const creacionFila = (cuerpo, fila, columnaObjeto) => {
   for (const [propiedad, valor] of Object.entries(columnaObjeto)) {
