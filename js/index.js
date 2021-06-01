@@ -85,11 +85,20 @@ const main = () => {
     )}€ (${tipoIva} %)`;
 
     moldeObjeto.estado.textContent = extraerEstado(abonada);
+    if (extraerEstado(abonada) !== "Abonada") {
+      moldeObjeto.estado.classList.add("no-abonada");
+    } else {
+      moldeObjeto.estado.classList.remove("no-abonada");
+    }
     moldeObjeto.vence.textContent = extraerVence(abonada, fecha, vencimiento);
+    if (extraerVence(abonada, fecha, vencimiento) !== "-") {
+      moldeObjeto.vence.classList.add("no-abonada");
+    } else {
+      moldeObjeto.vence.classList.remove("no-abonada");
+    }
     moldeObjeto.total.textContent = calcularTotal(base, (base * tipoIva) / 100);
 
     creacionFila(cuerpoTabla, filaClonada, moldeObjeto);
-
   }
 };
 
