@@ -26,11 +26,11 @@ const extraerConcepto = () => {};
 
 const calcularIva = (base, iva) => (base * iva) / 100;
 
-const calcularIvaTabla = (ivatotal) => {};
+const calcularIvaTabla = (ivatotal) => {ivaTotal.reduce((contador,numeritos)=>numeritos+contador,0)};
 
-const calcularToltalTabla = (totaltabla) => {};
+const calcularToltalTabla = (totaltabla) => {totalTabla.reduce((contador,numeritos)=>numeritos+contador,0)};
 
-const calcularBaseTabla = (basetabla) => {};
+const calcularBaseTabla = (basetabla) => {baseTotal.reduce((contador,numeritos)=>numeritos+contador,0)};
 const baseTotal = [];
 const ivaTotal = [];
 const totalTabla = [];
