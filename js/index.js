@@ -27,6 +27,10 @@ const calcularBaseTabla = () => {};
 const main = () => {
   const cuerpoTabla = document.querySelector(".cuerpo-tabla");
 
+  const facturasFiltradas = facturas.filter(
+    (factura) => factura.tipo === "ingreso"
+  );
+
   const pieTabla = document.querySelector(".pie-tabla");
 
   const fila = document.querySelector(".filaMolde");
@@ -58,7 +62,8 @@ const main = () => {
     tipoIva,
     tipo,
     abonada,
-  } of facturas) {
+  } of facturasFiltradas) {
+
     const filaClonada = fila.cloneNode();
     filaClonada.classList.remove("d-none");
     moldeObjeto.base.textContent = `${base}€`;
