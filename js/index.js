@@ -34,6 +34,28 @@ const calcularToltalTabla = (totaltabla) => {};
 
 const calcularBaseTabla = (basetabla) => {};
 
+const modificarEstado = (moldeObjeto) => {
+  if (moldeObjeto.estado.textContent !== "Abonada") {
+    moldeObjeto.estado.classList.add("no-abonada");
+    moldeObjeto.estado.classList.remove("abonada");
+  } else {
+    moldeObjeto.estado.classList.remove("no-abonada");
+    moldeObjeto.estado.classList.remove("table-success");
+    moldeObjeto.estado.classList.add("abonada");
+  }
+};
+
+const modificarVencimiento = (moldeObjetoo) => {
+  if (moldeObjeto.vence.textContent !== "-") {
+    moldeObjeto.vence.classList.add("no-abonada");
+    moldeObjeto.vence.classList.remove("abonada");
+  } else {
+    moldeObjeto.vence.classList.remove("no-abonada");
+    moldeObjeto.vence.classList.remove("table-success");
+    moldeObjeto.vence.classList.add("abonada");
+  }
+};
+
 const main = () => {
   const cuerpoTabla = document.querySelector(".cuerpo-tabla");
 
@@ -85,24 +107,15 @@ const main = () => {
     )}€ (${tipoIva} %)`;
 
     moldeObjeto.estado.textContent = extraerEstado(abonada);
-    if (extraerEstado(abonada) !== "Abonada") {
-      moldeObjeto.estado.classList.add("no-abonada");
-      moldeObjeto.estado.classList.remove("abonada");
-    } else {
-      moldeObjeto.estado.classList.remove("no-abonada");
-      moldeObjeto.estado.classList.remove("table-success");
-      moldeObjeto.estado.classList.add("abonada");
-    }
+    modificarEstado(moldeObjeto);
+
     moldeObjeto.vence.textContent = extraerVence(abonada, fecha, vencimiento);
-    if (extraerVence(abonada, fecha, vencimiento) !== "-") {
-      moldeObjeto.vence.classList.add("no-abonada");
-      moldeObjeto.vence.classList.remove("abonada");
-    } else {
-      moldeObjeto.vence.classList.remove("no-abonada");
-      moldeObjeto.vence.classList.remove("table-success");
-      moldeObjeto.vence.classList.add("abonada");
-    }
-    moldeObjeto.total.textContent = calcularTotal(base, (base * tipoIva) / 100);
+    modificarVencimiento(moldeObjeto);
+
+    moldeObjeto.total.textContent = calcularTotal(
+      base,
+      calcularIva(base, tipoIva)
+    );
 
     creacionFila(cuerpoTabla, filaClonada, moldeObjeto);
   }
