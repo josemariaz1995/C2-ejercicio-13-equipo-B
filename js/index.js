@@ -6,9 +6,17 @@ const calcularTotal = (base, iva) => base + iva;
 
 const extraerVence = () => {};
 
+const extraerFecha = (fecha) => {
+  const date = new Date(fecha);
+  const fechaDiaMesAnyo = `${date.getDate()}/${
+    date.getMonth() + 1
+  }/${date.getFullYear()}`;
+  return fechaDiaMesAnyo;
+};
+
 const extraerConcepto = () => {};
 
-const extraerIva = (base, iva) => (base * iva) / 100;
+const calcularIva = (base, iva) => (base * iva) / 100;
 
 const calcularIvaTabla = () => {};
 
@@ -45,11 +53,30 @@ const main = () => {
     vence: llamadaClase("venceFila"),
   };
 
-  for (const { base } of facturasFiltradas) {
+  for (const {
+    numero,
+    fecha,
+    vencimiento,
+    concepto,
+    base,
+    tipoIva,
+    tipo,
+    abonada,
+  } of facturasFiltradas) {
+
     const filaClonada = fila.cloneNode();
     filaClonada.classList.remove("d-none");
-    moldeObjeto.base.textContent = base;
-    creacionFila(cuerpoTabla, filaClonada, moldeObjeto);
+    moldeObjeto.base.textContent = `${base}€`;
+    moldeObjeto.numero.textContent = numero;
+    moldeObjeto.fecha.textContent = extraerFecha(fecha);
+    moldeObjeto.concepto.textContent = concepto;
+    moldeObjeto.iva.textContent = `${calcularIva(
+      base,
+      tipoIva
+    )}€ (${tipoIva} %)`;
+    if (tipo === "ingreso") {
+      creacionFila(cuerpoTabla, filaClonada, moldeObjeto);
+    }
   }
 };
 
