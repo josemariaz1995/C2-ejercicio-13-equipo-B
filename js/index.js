@@ -23,30 +23,39 @@ const main = () => {
 
   const pieTabla = document.querySelector(".pie-tabla");
 
+  const fila = document.querySelector(".filaMolde");
+
   const moldeHijos = Array.from(document.querySelectorAll(".filaMolde > td"));
 
-  console.log(moldeHijos);
-
   const llamadaClase = (clase) =>
-    moldeHijos.filter((factura) => factura.className.includes(clase))[0];
+    moldeHijos
+      .filter((factura) => factura.className.includes(clase))[0]
+      .cloneNode();
 
   const moldeObjeto = {
     numero: llamadaClase("numFila"),
     fecha: llamadaClase("fechaFila"),
-    concepto: llamadaClase("conceptofila"),
+    concepto: llamadaClase("conceptoFila"),
     base: llamadaClase("baseFila"),
     iva: llamadaClase("ivaFila"),
     total: llamadaClase("totalFila"),
     estado: llamadaClase("estadoFila"),
     vence: llamadaClase("venceFila"),
   };
-  const creacionFila = () => {
-    for (const factura of facturas) {
-      return;
-    }
-  };
+  for (const { base } of facturas) {
+    const filaClonada = fila.cloneNode();
+    filaClonada.classList.remove("d-none");
+    moldeObjeto.base.textContent = base;
+    creacionFila(cuerpoTabla, filaClonada, moldeObjeto);
+  }
+};
 
-  console.log(moldeObjeto);
+const creacionFila = (cuerpo, fila, columnaObjeto) => {
+  for (const [propiedad, valor] of Object.entries(columnaObjeto)) {
+    fila.append(valor.cloneNode(true));
+  }
+
+  cuerpo.append(fila);
 };
 
 main();
