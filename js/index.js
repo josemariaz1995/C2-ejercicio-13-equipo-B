@@ -19,6 +19,10 @@ const calcularBaseTabla = () => {};
 const main = () => {
   const cuerpoTabla = document.querySelector(".cuerpo-tabla");
 
+  const facturasFiltradas = facturas.filter(
+    (factura) => factura.tipo === "ingreso"
+  );
+
   const pieTabla = document.querySelector(".pie-tabla");
 
   const fila = document.querySelector(".filaMolde");
@@ -40,7 +44,8 @@ const main = () => {
     estado: llamadaClase("estadoFila"),
     vence: llamadaClase("venceFila"),
   };
-  for (const { base } of facturas) {
+
+  for (const { base } of facturasFiltradas) {
     const filaClonada = fila.cloneNode();
     filaClonada.classList.remove("d-none");
     moldeObjeto.base.textContent = base;
