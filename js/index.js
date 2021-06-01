@@ -1,5 +1,23 @@
 import { facturas } from "../datos/facturas.js";
 
+const extraerEstado = () => {};
+
+const calcularTotal = () => {};
+
+const extraerVence = () => {};
+
+const extraerConcepto = () => {};
+
+const extraerBase = () => {};
+
+const extraerIva = () => {};
+
+const calcularIvaTabla = () => {};
+
+const calcularToltalTabla = () => {};
+
+const calcularBaseTabla = () => {};
+
 const main = () => {
   const cuerpoTabla = document.querySelector(".cuerpo-tabla");
 
