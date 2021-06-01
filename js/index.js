@@ -83,11 +83,13 @@ const main = () => {
       base,
       tipoIva
     )}€ (${tipoIva} %)`;
+
     moldeObjeto.estado.textContent = extraerEstado(abonada);
     moldeObjeto.vence.textContent = extraerVence(abonada, fecha, vencimiento);
-    if (tipo === "ingreso") {
-      creacionFila(cuerpoTabla, filaClonada, moldeObjeto);
-    }
+    moldeObjeto.total.textContent = calcularTotal(base, (base * tipoIva) / 100);
+
+    creacionFila(cuerpoTabla, filaClonada, moldeObjeto);
+
   }
 };
 
