@@ -122,12 +122,12 @@ const main = () => {
   }
   console.log(baseTotal);
 
-  sumaTotalBase.textContent = `${calcularTotales(baseTotal)}`;
+  sumaTotalBase.textContent = `${calcularTotales(baseTotal)}€`;
 
-  sumaTotalIva.textContent = `${calcularTotales(ivaTotal)}`;
+  sumaTotalIva.textContent = `${calcularTotales(ivaTotal)}€`;
 
   sumaTotalTabla.textContent = `${
-    +sumaTotalBase.textContent + +sumaTotalIva.textContent
+    calcularTotales(baseTotal) + calcularTotales(ivaTotal)
   }€`;
 };
 
