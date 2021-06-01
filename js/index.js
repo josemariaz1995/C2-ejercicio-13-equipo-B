@@ -18,11 +18,11 @@ const extraerConcepto = () => {};
 
 const extraerIva = (base, iva) => (base * iva) / 100;
 
-const calcularIvaTabla = () => {};
+const calcularIvaTabla = (ivatotal) => {};
 
-const calcularToltalTabla = () => {};
+const calcularToltalTabla = (totaltabla) => {};
 
-const calcularBaseTabla = () => {};
+const calcularBaseTabla = (basetabla) => {};
 
 const main = () => {
   const cuerpoTabla = document.querySelector(".cuerpo-tabla");
