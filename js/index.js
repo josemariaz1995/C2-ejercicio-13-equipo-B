@@ -22,8 +22,6 @@ const extraerFecha = (fecha) => {
   return fechaDiaMesAnyo;
 };
 
-const extraerConcepto = () => {};
-
 const calcularIva = (base, iva) => (base * iva) / 100;
 
 const baseTotal = [];
@@ -89,7 +87,6 @@ const main = () => {
     concepto,
     base,
     tipoIva,
-    tipo,
     abonada,
   } of facturasFiltradas) {
     baseTotal.push(base);
